@@ -17,6 +17,7 @@ const userController = {
   },
 
 
+  
   // Finde a single a thought
   getOneThought({ params }, res) {
     Thought.findOne({ _id: params.id })
@@ -34,6 +35,7 @@ const userController = {
         res.status(400).json(err);
       });  
   },
+
 
 
   // Add a thought and update the user data to include that thought
@@ -59,6 +61,7 @@ const userController = {
   },
 
 
+
   //add reaction
   addReaction ({ params, body}, res) {
     Thought.findOneAndUpdate(
@@ -77,6 +80,7 @@ const userController = {
   },
 
 
+
   //delete Reaction
   removeReaction({ params }, res) {
     Thought.findOneAndUpdate(
@@ -88,6 +92,8 @@ const userController = {
     .catch(err => res.json(err));
   },
 
+
+  
   // update a thought by id
   updateThought({ params, body }, res) {
     Thought.findOneAndUpdate(
@@ -106,6 +112,7 @@ const userController = {
   },
 
 
+
   // delete a single thought
   deleteOneThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.id })
@@ -118,6 +125,7 @@ const userController = {
     })
     .catch(err => res.status(400).json(err))
   },
+
 
 
    // delete a single user
@@ -143,8 +151,6 @@ const userController = {
       .catch(err => res.json(err));
   },
 }
-
-
 
 
 module.exports = userController;
