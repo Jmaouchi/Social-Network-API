@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+const moment = require('moment')
 
 // this is a subdocument and the reason why we initialize it befor the commentSchema because, we need to init something before we can invoque it
 const ReactionSchema = new Schema( 
@@ -13,6 +13,7 @@ const ReactionSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      minlength: 1,
       maxlength: 280 
     },
     username: {
@@ -23,7 +24,7 @@ const ReactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: createdAtVal => dateFormat(createdAtVal) // this is where we will use the getter 
+      get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a') // getter 
     }
   },
   {
@@ -46,7 +47,7 @@ const ThoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       // Added a gatter to transform our date
-      get: (createdAtVal) => dateFormat(createdAtVal)
+      get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a') // getter 
     },
     username: {
       type: String,
