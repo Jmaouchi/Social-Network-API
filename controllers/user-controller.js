@@ -12,16 +12,16 @@ const userController = {
       path: 'thoughts',
       select: '-__v'
       })
-      // this wiill take off the _v that is coming from the data (this is a mongoose field by default)
-      .select('-__v')
-      // this method will sort the data from newest to oldest
-      .sort({ _id: -1 })
-      //then display the data
-      .then(dbUserData => res.json(dbUserData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+    // this wiill take off the _v that is coming from the data (this is a mongoose field by default)
+    .select('-__v')
+    // this method will sort the data from newest to oldest
+    .sort({ _id: -1 })
+    //then display the data
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
   },
 
   
@@ -34,7 +34,8 @@ const userController = {
       })
       .populate({
         path:'friends',
-        select: '-__v'
+        select: '-__v',
+        select: ''
       })
       .select('-__v')
       .then(dbUserData => {
