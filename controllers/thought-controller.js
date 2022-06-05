@@ -5,7 +5,6 @@ const userController = {
   // Get all thoughts
   getAllThoughts(req, res) {
     Thought.find({})
-      // this wiill take off the _v that is coming from the data (this is a mongoose field by default)
       .select('-__v')
       // this method will sort the data from newest to oldest
       .sort({ _id: -1 })
@@ -39,7 +38,7 @@ const userController = {
 
   // Add a thought and update the user data to include that thought
   addThought({ params, body }, res) {
-    console.log('params is', params);
+    console.log(params);
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
@@ -51,7 +50,7 @@ const userController = {
       .then(dbThoughData => {
         console.log(dbThoughData);
         if (!dbThoughData) {
-          res.status(404).json({ message: 'No user found with this id!' });
+          res.status(404).json({ message: 'No user found with this id' });
           return;
         }
         res.json(dbThoughData);
@@ -60,11 +59,42 @@ const userController = {
   },
 
 
+  //add reaction
+  addReaction ({ params, body}, res) {
+    Thought.findOneAndUpdate(
+        { _id: params.thoughtId },
+        { $push: { reactions: body } },
+        { new: true, runValidators: true }
+    )
+    .then(dbThoughtData => {
+        if (!dbThoughtData) {
+            res.status(404).json({ message: 'No thought with this ID!' });
+            return;
+        }
+        res.json(dbThoughtData)
+    })
+    .catch(err => res.json(err));
+  },
+
+
+  //delete Reaction
+  removeReaction({ params }, res) {
+    Thought.findOneAndUpdate(
+        { _id: params.thoughtId },
+        { $pull: { reactions: { reactionId: params.reactionId } } },
+        { new: true }
+    )
+    .then(dbThoughtData => res.json(dbThoughtData))
+    .catch(err => res.json(err));
+  },
 
   // update a thought by id
   updateThought({ params, body }, res) {
-    Thought.findOneAndUpdate({ _id: params.id }, body, { new: true , runValidators: true})// this {new: true } will return the original document. 
-    //By setting the parameter to true, we're instructing Mongoose to return the new version of the document to include the update.
+    Thought.findOneAndUpdate(
+      { _id: params.id },
+      body,
+      { new: true , runValidators: true})// this {new: true } will return the original document. 
+      //By setting the parameter to true, we're instructing Mongoose to return the new version of the document to include the update.
       .then(dbThoughData => {
         if (!dbThoughData) {
           res.status(404).json({ message: 'No Thought found with this id!' });
@@ -76,8 +106,22 @@ const userController = {
   },
 
 
-  // delete a single user
-  deleteThought({ params }, res) {
+  // delete a single thought
+  deleteOneThought({ params }, res) {
+    Thought.findOneAndDelete({ _id: params.id })
+    .then(dbUserData => {
+    if (!dbUserData) {
+        res.status(404).json({ message: 'No Thought found with this ID!' });
+        return;
+    }
+    res.json(`user ${dbUserData.username} thought is been deleted`);
+    })
+    .catch(err => res.status(400).json(err))
+  },
+
+
+   // delete a single user
+   deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.thoughtId })
       .then(deletedThought => {
         if (!deletedThought) {
@@ -99,6 +143,8 @@ const userController = {
       .catch(err => res.json(err));
   },
 }
+
+
 
 
 module.exports = userController;

@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
 const Thoughts = require('./Thought');
+const moment = require('moment')
 
 const UserSchema = new Schema(
   {
@@ -44,6 +44,7 @@ const UserSchema = new Schema(
 UserSchema.virtual('friendCount').get(function() {
   return this.friends.length;
 });
+
 // create the Pizza model using the PizzaSchema
 const User = model('user', UserSchema);
 

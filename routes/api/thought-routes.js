@@ -4,7 +4,10 @@ const {
   getOneThought,
   addThought,
   updateThought,
-  deleteThought
+  deleteThought, // this will delete a thought with using the user id 
+  deleteOneThought, // this will delete a thought with only the tought id
+  addReaction,
+  removeReaction
 } = require('../../controllers/thought-controller');
 
 // api to get all thoughts
@@ -12,22 +15,34 @@ router
   .route('/')
   .get(getAllThoughts)
   
+  
 //  GET / PUT and DELETE methodes to get a single thought, update thought and delete a thought
 router
 .route('/:id')
 .get(getOneThought)
 .put(updateThought)
+.delete(deleteOneThought)
 
-  
-// POST api tp create a thought
-router
-  .route('/:userId')
-  .post(addThought)
- 
 
 router
 .route('/:userId/:thoughtId')
 .delete(deleteThought)
+
+router
+  .route('/:userId')
+  .post(addThought)
+
+  
+router
+    .route('/:thoughtId/reactions')
+    .post(addReaction)
+
+router
+.route('/:thoughtId/:reactionId')
+.delete(removeReaction)
+
+
+
 
 
 module.exports = router;
