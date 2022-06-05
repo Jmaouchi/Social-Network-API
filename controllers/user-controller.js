@@ -35,7 +35,6 @@ const userController = {
       .populate({
         path:'friends',
         select: '-__v',
-        select: ''
       })
       .select('-__v')
       .then(dbUserData => {
