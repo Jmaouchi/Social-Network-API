@@ -42,7 +42,7 @@ const userController = {
   addThought({ params, body }, res) {
     console.log(params);
     Thought.create(body)
-      .then(({ _id }) => {
+      .then(({ _id }) => { // get the id from the thought data then use it to that to the user data 
         return User.findOneAndUpdate(
           { _id: params.userId },
           { $push: { thoughts: _id } },
@@ -59,7 +59,6 @@ const userController = {
       })
       .catch(err => res.json(err));
   },
-
 
 
   //add reaction

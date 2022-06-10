@@ -68,7 +68,7 @@ ThoughtSchema.virtual('reactionCount').get(function() {
 });
 
 // create the Pizza model using the PizzaSchema
-const Thoughts = model('thought', ThoughtSchema);
+const Thought = model('thought', ThoughtSchema);
 
 // export the Pizza model
-module.exports = Thoughts;
+module.exports = Thought;
