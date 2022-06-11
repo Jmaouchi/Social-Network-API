@@ -5,7 +5,7 @@ const {
   addThought,
   updateThought,
   deleteThought, // this will delete a thought with using the user id 
-  deleteOneThought, // this will delete a thought with only the tought id
+  // deleteOneThought, // this will delete a thought with only the tought id
   addReaction,
   removeReaction
 } = require('../../controllers/thought-controller');
@@ -21,7 +21,7 @@ router
 .route('/:id')
 .get(getOneThought)
 .put(updateThought)
-.delete(deleteOneThought)
+// .delete(deleteOneThought)
 
 
 router
@@ -31,15 +31,15 @@ router
 router
   .route('/:userId')
   .post(addThought)
-
+  
   
 router
     .route('/:thoughtId/reactions')
     .post(addReaction)
 
 router
-.route('/:thoughtId/reactions/:reactionId')
-.delete(removeReaction)
+    .route('/:thoughtId/reactions/:reactionId')
+    .delete(removeReaction)
 
 
 

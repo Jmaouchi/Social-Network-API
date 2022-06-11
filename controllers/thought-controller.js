@@ -5,6 +5,7 @@ const userController = {
   // Get all thoughts
   getAllThoughts(req, res) {
     Thought.find({})
+      .populate({path: 'reactions', select: '-__v'})
       .select('-__v')
       // this method will sort the data from newest to oldest
       .sort({ _id: -1 })
@@ -21,6 +22,7 @@ const userController = {
   // Finde a single a thought
   getOneThought({ params }, res) {
     Thought.findOne({ _id: params.id })
+      .populate({path: 'reactions', select: '-__v'})
       .select('-__v')
       .then(dbThoughData => {
         // If no though is found, send 404
@@ -111,23 +113,21 @@ const userController = {
   },
 
 
-
   // delete a single thought
-  deleteOneThought({ params }, res) {
-    Thought.findOneAndDelete({ _id: params.id })
-    .then(dbUserData => {
-    if (!dbUserData) {
-        res.status(404).json({ message: 'No Thought found with this ID!' });
-        return;
-    }
-    res.json(`user ${dbUserData.username} thought is been deleted`);
-    })
-    .catch(err => res.status(400).json(err))
-  },
+  // deleteOneThought({ params }, res) {
+  //   Thought.findOneAndDelete({ _id: params.id })
+  //   .then(dbUserData => {
+  //   if (!dbUserData) {
+  //       res.status(404).json({ message: 'No Thought found with this ID!' });
+  //       return;
+  //   }
+  //   res.json(`user ${dbUserData.username} thought is been deleted`);
+  //   })
+  //   .catch(err => res.status(400).json(err))
+  // },
 
 
-
-   // delete a single user
+   // delete a thought and update user data 
    deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.thoughtId })
       .then(deletedThought => {
