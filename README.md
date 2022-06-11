@@ -50,12 +50,12 @@ SOFTWARE
 
 
 
-**4. [Mongoose](https://Mongoose.com/)**: 
+**2. [Mongoose](https://Mongoose.com/)**: 
 
 * Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node. js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoD
 
 
-**5. [Express.js](https://expressjs.com/)**:
+**3. [Express.js](https://expressjs.com/)**:
 
 * Web Applications : Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and   mobile applications.
 
@@ -64,7 +64,7 @@ SOFTWARE
 * Performance : Express provides a thin layer of fundamental web application features, without obscuring Node.js features.
 
 
-**12. [nodemon](https;//nodemon.com/)** :
+**4. [nodemon](https;//nodemon.com/)** :
 
 * nodemon is a command-line interface (CLI) utility developed by @rem that wraps your Node app, watches the file system, and automatically restarts the process
 
