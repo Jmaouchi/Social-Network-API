@@ -102,11 +102,11 @@ SOFTWARE
 
 
 # Video walkthrough 
-  * User routes 1: https://github.com/Jmaouchi/Social-Network-API/issues/3
-  * User routes 2: https://github.com/Jmaouchi/Social-Network-API/issues/4
-  * Thought routes: https://github.com/Jmaouchi/Social-Network-API/issues/6
-  * Add an remove friends routes: https://github.com/Jmaouchi/Social-Network-API/issues/5
-  * add and remove reactions: https://github.com/Jmaouchi/Social-Network-API/issues/7
+  * User routes 1:  follow path https://github.com/Jmaouchi/Social-Network-API/issues/3
+  * User routes 2: follow path https://github.com/Jmaouchi/Social-Network-API/issues/4
+  * Thought routes: follow path https://github.com/Jmaouchi/Social-Network-API/issues/6
+  * Add an remove friends routes: follow path https://github.com/Jmaouchi/Social-Network-API/issues/5
+  * add and remove reactions: follow path https://github.com/Jmaouchi/Social-Network-API/issues/7
 
 
 
